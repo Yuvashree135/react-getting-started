@@ -1,0 +1,43 @@
+// destructuring in array
+
+const PI = Math.PI;
+const E = Math.E;
+const SQRT2 = Math.SQRT2;
+// above lines are similar to this one line below.
+
+const {PI, E, SQRT2}  = Math;
+
+// Somewhere in a React App
+const {Component, Fragment, useState} = require('react');
+useState();
+
+const [value, setValue] = useState(initialValue);
+
+const circle = {
+  label: 'circleX',
+  radius: 2,
+};
+const circleArea = ({radius}, {precision = 2} = {}) =>
+  (PI * radius * radius).toFixed(precision);
+
+console.log(
+  circleArea(circle, { precision: 5 })
+);
+
+
+// destructuring in array
+const [first, second,, forth] = [10, 20, 30, 40];
+
+
+const [first, ...rest]= [1,2,3,4]
+
+first + rest
+
+const [f1, f4, ...rest1] = [1,2,3,4]
+
+f1 + rest1+f4
+
+// cannot be done as ...rest should always be the last
+const [f10, ...rest2, f11] = [1,2,3,4]
+f10 + rest2
+

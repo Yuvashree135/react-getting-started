@@ -1,0 +1,33 @@
+// Passing variables and behaviors to child component
+
+// State values are accessible only by the component.
+
+function Button(props) { 
+	return (
+    <button onClick={props.incrementor}>
+      {props.counter}
+    </button>);
+}
+
+function Display(props) {
+  return (
+    <div>{props.counter}</div>
+  );
+}
+
+// the parent controller which maintains all the responsibilities.
+function AppComponent() {
+  const [counter, setCounter] = useState(0);
+  const incrementCounter = () => setCounter(counter + 1 ); 
+  return (
+    <div>
+      <Button counter={counter} incrementor={incrementCounter}/> 
+      <Display counter={counter}/>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <AppComponent/>, 
+  document.getElementById('mountNode'),
+);

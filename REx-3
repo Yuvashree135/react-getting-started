@@ -1,0 +1,47 @@
+// create and update state variables.
+
+function Button() {
+  const [counter, setCounter] = useState(0);
+	return <button onClick={
+      () => setCounter(counter+1)
+    }>{counter}</button>;
+}
+
+ReactDOM.render(
+  <Button />, 
+  document.getElementById('mountNode'),
+);
+
+// counter++ doesnt work inside the setCounter setter.
+
+
+// Assignment - Start value with 5 and double it on each click
+
+function Button() {
+  const [counter, setCounter] = useState(5);
+	return <button onClick={
+      () => setCounter(counter*2)
+    }>{counter}</button>;
+}
+
+ReactDOM.render(
+  <Button />, 
+  document.getElementById('mountNode'),
+);
+
+// beautified code
+
+function Button() {
+	const [counter, setCounter] = useState(5);
+	const handleClick = () => setCounter(counter * 2);
+	return (
+		<button onClick={handleClick}>
+		  {counter}
+		</button>
+	);
+}
+
+ReactDOM.render(
+  <Button />, 
+  document.getElementById('mountNode'),
+);

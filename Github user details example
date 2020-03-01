@@ -1,0 +1,108 @@
+class CardList extends React.Component {
+  render() {
+    return (
+        <div>
+          {this.props.profiles.map(profile => <Card {...profile}/>)}
+        </div>
+    );
+  };
+}
+
+// key is used as an unique id for each card
+class Card extends React.Component {
+	render() {
+  	const profile = this.props;
+  	return (
+    	<div className="github-profile" key={profile.id}>
+    	  <img src={profile.avatar_url} />
+        <div className="info">
+          <div className="name">{profile.name}</div>
+          <div className="company">{profile.company}</div>
+        </div>
+    	</div>
+    );
+  }
+}
+
+class Form extends React.Component {
+  
+//   userNameInput = React.createRef();
+  
+//  updateRecord = (event) => {
+//     event.preventDefault();
+//   };
+  
+//   render() {
+//     return (
+//       <form onSubmit={this.updateRecord}>
+//         <input type="text" ref={this.userNameInput} placeholder="username" required/>
+//         <button>Add me</button>
+//       </form>
+//       );
+//   }
+  
+  // instead of ref we can also use state variables
+  
+  state = {userName: ''};
+
+  updateRecord = async (event) => {
+    event.preventDefault();
+    const response = await axios.get(`https://api.github.com/users/${this.state.userName}`);
+    
+    this.props.updateProfile(response.data);
+    this.setState({userName: ''});
+  }
+  
+  render() {
+    return (
+      <form onSubmit={this.updateRecord}>
+        <input type="text" value={this.state.userName} onChange={event => this.setState({userName: event.target.value})}  placeholder="username" required/>
+        <button>Add Card</button>
+      </form>
+    )
+  }
+}
+
+class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     profiles: []
+  //   }
+  // }
+  
+  // or declare directly like
+  
+  state = {
+    profiles: []
+  };
+
+  updateProfile = (profile) =>  {
+      // this.setState({profiles: [...this.state.profiles, profile]});
+    // spread operator
+    this.setState(prevState => ({
+      profiles: [...prevState.profiles, profile]
+    }));
+  };
+
+addNewProfile = (profileData) => {
+  	this.setState(prevState => ({
+    	profiles: [...prevState.profiles, profileData],
+    }));
+  };
+
+	render() {
+  	return (
+    	<div>
+        <div className="header">{this.props.title}</div>
+        <Form updateProfile={this.updateProfile}/>
+        <CardList profiles={this.state.profiles}/>
+    	</div>
+    );
+  }	
+}
+
+ReactDOM.render(
+	<App title="The GitHub Cards App" />,
+  mountNode,
+);

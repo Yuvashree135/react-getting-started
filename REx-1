@@ -1,0 +1,24 @@
+https://jscomplete.com/playground/rgs1.1
+
+React - eg:1
+
+function Hello() {
+	return <div>Hello React!</div>;
+}
+
+ReactDOM.render(
+  <Hello />, 
+  document.getElementById('mountNode'),
+);  
+
+// also written as
+
+function Hello() {
+	// return <div>Hello React!</div>;
+  return React.createElement('div', null, 'Hello React!!!')
+}
+
+ReactDOM.render(
+  <Hello />, 
+  document.getElementById('mountNode'),
+);  

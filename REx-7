@@ -1,0 +1,72 @@
+// Reusability of a component with different props
+
+// create a reference method to invoke the function with the parameter.
+
+function Button(props) { 
+  const handleClick = () => props.incrementor(props.jump);
+	return (
+    <button onClick={handleClick}>
+      +{props.jump}
+    </button>);
+}
+
+function Display(props) {
+  return (
+    <div>{props.counter}</div>
+  );
+}
+
+// the parent controller which maintains all the responsibilities.
+function AppComponent() {
+  const [counter, setCounter] = useState(0);
+  const incrementCounter = (val) => setCounter(counter + val ); 
+  return (
+    <div>
+      <Button counter={counter} incrementor={incrementCounter} jump={3}/><br/>
+      <Button counter={counter} incrementor={incrementCounter} jump={5}/> <br/>
+      Total = <Display counter={counter}/>
+    </div>
+  )
+}
+
+// the jump value is passed as {5} so that its treated as number. if its passed as jump="5" it will be treated as a string.
+
+ReactDOM.render(
+  <AppComponent/>, 
+  document.getElementById('mountNode'),
+);
+
+// or bind it to the function.
+
+function Button(props) { 
+	return (
+    <button onClick={props.incrementor.bind(this, props.jump)}>
+      +{props.jump}
+    </button>);
+}
+
+function Display(props) {
+  return (
+    <div>{props.counter}</div>
+  );
+}
+
+// the parent controller which maintains all the responsibilities.
+function AppComponent() {
+  const [counter, setCounter] = useState(0);
+  const incrementCounter = (val) => setCounter(counter + val ); 
+  return (
+    <div>
+      <Button counter={counter} incrementor={incrementCounter} jump={3}/><br/>
+      <Button counter={counter} incrementor={incrementCounter} jump={5}/> <br/>
+      Total = <Display counter={counter}/>
+    </div>
+  )
+}
+
+// the jump value is passed as {5} so that its treated as number. if its passed as jump="5" it will be treated as a string.
+
+ReactDOM.render(
+  <AppComponent/>, 
+  document.getElementById('mountNode'),
+);

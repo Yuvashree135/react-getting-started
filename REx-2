@@ -1,0 +1,30 @@
+// creating function and invoke them
+
+function testFunction() {
+  console.log('Hi');
+}
+
+function Button() {
+	return <button onClick={testFunction}>TEST</button>;
+}
+
+ReactDOM.render(
+  <Button />, 
+  document.getElementById('mountNode'),
+);
+
+// or
+
+function Button() {
+	return <button onClick={
+		function testFunction() {
+		  console.log('Hi');
+		}
+	}
+	>TEST</button>;
+}
+
+ReactDOM.render(
+  <Button />, 
+  document.getElementById('mountNode'),
+);

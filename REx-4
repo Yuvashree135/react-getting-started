@@ -1,0 +1,77 @@
+// adding two components to display
+
+1. Add as an array.
+2. Use a parent div.
+3. Use React.Fragment
+
+// 1 - array
+
+function Button() {
+	const [counter, setCounter] = useState(5);
+  const handleClick = () => setCounter(counter * 2);
+	return (
+    <button onClick={handleClick}>
+      {counter}
+    </button>);
+}
+
+function Display() {
+  return (
+    <div>Second Element</div>
+  );
+}
+
+ReactDOM.render(
+  [<Button />, <Display />], 
+  document.getElementById('mountNode'),
+);
+
+// 2 - parent div
+
+function Button() {
+	const [counter, setCounter] = useState(5);
+  const handleClick = () => setCounter(counter * 2);
+	return (
+    <button onClick={handleClick}>
+      {counter}
+    </button>);
+}
+
+function Display() {
+  return (
+    <div>Second Element</div>
+  );
+}
+
+ReactDOM.render(
+  <div><Button /> <Display /></div>, 
+  document.getElementById('mountNode'),
+);
+
+// 3 - React.Fragment
+
+Using react fragment doesnt create an element in the DOM
+
+function Button() {
+	const [counter, setCounter] = useState(5);
+  const handleClick = () => setCounter(counter * 2);
+	return (
+    <button onClick={handleClick}>
+      {counter}
+    </button>);
+}
+
+function Display() {
+  return (
+    <div>Second Element</div>
+  );
+}
+
+ReactDOM.render(
+  <React.Fragment>
+    <Button /> <Display />
+  </React.Fragment>, 
+  document.getElementById('mountNode'),
+);
+
+// if the environment supports we can also use <></> empty tags instead of React.Fragment

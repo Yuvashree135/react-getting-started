@@ -1,0 +1,30 @@
+// Creating a parent component to manage all child components
+
+function Button() {
+	const [counter, setCounter] = useState(5);
+  const handleClick = () => setCounter(counter * 2);
+	return (
+    <button onClick={handleClick}>
+      {counter}
+    </button>);
+}
+
+function Display() {
+  return (
+    <div>Second Element</div>
+  );
+}
+
+function AppComponent() {
+  return (
+    <div>
+      <Button/> 
+      <Display/>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <AppComponent/>, 
+  document.getElementById('mountNode'),
+);
